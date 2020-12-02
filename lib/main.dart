@@ -15,7 +15,7 @@ class Quizzler extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.brown,
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
@@ -33,6 +33,17 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scoreKeeper = [
+    Icon(
+      Icons.check,
+      color: Colors.lightGreen,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.black,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -53,7 +64,14 @@ class _QuizPageState extends State<QuizPage> {
             child: Padding(
           padding: EdgeInsets.all(15),
           child: FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                scoreKeeper.add(Icon(
+                  Icons.check,
+                  color: Colors.green,
+                ));
+              });
+            },
             color: Colors.green,
             child: Text(
               'True',
@@ -65,14 +83,24 @@ class _QuizPageState extends State<QuizPage> {
             child: Padding(
           padding: EdgeInsets.all(15),
           child: FlatButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                scoreKeeper.add(Icon(
+                  Icons.close,
+                  color: Colors.red,
+                ));
+              });
+            },
             color: Colors.blue,
             child: Text(
               'False',
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
           ),
-        ))
+        )),
+        Row(
+          children: scoreKeeper,
+        )
       ],
     );
   }
