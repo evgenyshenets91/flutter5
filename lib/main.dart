@@ -38,8 +38,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  int questionNumber = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,7 +49,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Center(
-                child: Text(quizBrain.questionBank[questionNumber].questionText,
+                child: Text(quizBrain.getQuestionText(),
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 25, color: Colors.white)),
               ),
@@ -65,15 +63,15 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             onPressed: () {
-              bool correctAnswer =
-                  quizBrain.questionBank[questionNumber].questionAnswer;
+              bool correctAnswer = quizBrain.getQuestionAnswer();
+
               if (correctAnswer == true) {
                 print('right');
               } else {
                 print('wrong');
               }
               setState(() {
-                questionNumber++;
+                quizBrain.nextQuestion();
                 // scoreKeeper.add(Icon(
                 //   Icons.check,
                 //   color: Colors.green,
@@ -92,15 +90,15 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             onPressed: () {
-              bool correctAnswer =
-                  quizBrain.questionBank[questionNumber].questionAnswer;
+              bool correctAnswer = quizBrain.getQuestionAnswer();
+
               if (correctAnswer == false) {
                 print('right');
               } else {
                 print('wrong');
               }
               setState(() {
-                questionNumber++;
+                quizBrain.nextQuestion();
                 // scoreKeeper.add(Icon(
                 //   Icons.close,
                 //   color: Colors.red,
