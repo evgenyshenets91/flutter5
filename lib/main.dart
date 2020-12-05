@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter5/question.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() {
   runApp(Quizzler());
@@ -36,21 +38,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  List<Question> questionBank = [
-    Question(
-      qstText: 'You can lead a cow down stairs but not up stairs',
-      qstAsr: false,
-    ),
-    Question(
-      qstText: 'Approximately one quarter of human bones are in the feet',
-      qstAsr: true,
-    ),
-    Question(
-      qstText: 'A slug\'s blood is green',
-      qstAsr: true,
-    ),
-  ];
-
   int questionNumber = 0;
 
   @override
@@ -64,7 +51,7 @@ class _QuizPageState extends State<QuizPage> {
             child: Padding(
               padding: EdgeInsets.all(10),
               child: Center(
-                child: Text(questionBank[questionNumber].questionText,
+                child: Text(quizBrain.questionBank[questionNumber].questionText,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 25, color: Colors.white)),
               ),
@@ -78,7 +65,8 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             onPressed: () {
-              bool correctAnswer = questionBank[questionNumber].questionAnswer;
+              bool correctAnswer =
+                  quizBrain.questionBank[questionNumber].questionAnswer;
               if (correctAnswer == true) {
                 print('right');
               } else {
@@ -104,7 +92,8 @@ class _QuizPageState extends State<QuizPage> {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             onPressed: () {
-              bool correctAnswer = questionBank[questionNumber].questionAnswer;
+              bool correctAnswer =
+                  quizBrain.questionBank[questionNumber].questionAnswer;
               if (correctAnswer == false) {
                 print('right');
               } else {
